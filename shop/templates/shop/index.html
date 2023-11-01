@@ -11,7 +11,7 @@
     <nav class="navbar" style="background-color: #1C2128;">
         <div class="container-fluid">
           <a class="navbar-brand text-white" href="#">Магазин "Стол, стул, табурет"</a>
-          <a href="" class="btn btn-outline-light">Купить</a>
+          <a href="/cart" class="btn btn-outline-light">Корзина</a>
         </div>
     </nav>
     <div class="container">
@@ -25,7 +25,7 @@
                         <div class="card-body">
                           <h5 class="card-title">{{p.name}}</h5>
                           <p class="card-text">{{p.price}} руб.</p>
-                          <a href="/buy/{{ p.id }}" class="btn btn-primary">Добавить в корзину</a>
+                          <a href="{% url 'add_to_cart' p.id %}" class="btn btn-primary">Добавить в корзину</a>
                         </div>
                       </div>
                 </div>

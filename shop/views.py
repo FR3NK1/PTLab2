@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView
 
@@ -9,6 +9,26 @@ def index(request):
     products = Product.objects.all()
     context = {'products': products}
     return render(request, 'shop/index.html', context)
+
+def add_to_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    product_id_str = str(product_id)
+    cart[product_id_str] = cart.get(product_id_str, 0) + 1
+    request.session['cart'] = cart
+    return redirect('index')
+
+def cart_detail(request):
+    cart = request.session.get('cart', {})
+    products = Product.objects.filter(id__in=cart.keys())
+
+    cart_products = []
+    for product in products:
+        cart_products.append({
+            'product': product,
+            'quantity': cart[str(product.id)]
+        })
+
+    return render(request, 'shop/cart.html', {'cart_products': cart_products})
 
 
 class PurchaseCreate(CreateView):
