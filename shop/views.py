@@ -7,17 +7,35 @@ from .models import Product, Purchase
 # Create your views here.
 def index(request):
     products = Product.objects.all()
-    context = {'products': products}
+
+    cart = request.session.get('cart', {})
+    products_in_cart = list(map(int,list(cart.keys())))
+
+    context = {'products': products, 'products_in_cart': products_in_cart}
     return render(request, 'shop/index.html', context)
 
 def add_to_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    product_id_str = str(product_id)
+    cart[product_id_str] = 1
+    request.session['cart'] = cart
+    return redirect('index')
+
+def delete_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    product_id_str = str(product_id)
+    del cart[product_id_str]
+    request.session['cart'] = cart
+    return redirect('index')
+
+def add_in_cart(request, product_id):
     cart = request.session.get('cart', {})
     product_id_str = str(product_id)
     cart[product_id_str] = cart.get(product_id_str, 0) + 1
     request.session['cart'] = cart
     return redirect('/cart')
 
-def delete_from_cart(request, product_id):
+def delete_in_cart(request, product_id):
     cart = request.session.get('cart', {})
     product_id_str = str(product_id)
     new_amount = cart.get(product_id_str, 1) - 1

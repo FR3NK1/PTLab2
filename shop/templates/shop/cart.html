@@ -47,8 +47,7 @@
                     {{ item.product.price }} руб.
                   </h5>
                   <p class="card-text">
-                    <small class="text-body-secondary"
-                      >Количество: {{ item.quantity }}</small
+                    <small class="text-body-secondary">Количество: {{ item.quantity }}</small
                     >
                   </p>
                 </div>
@@ -56,8 +55,8 @@
               <div class="col-md-2">
                 <div class="card-body">
                     <div class="d-grid gap-1">
-                        <a href="{% url 'add_to_cart' item.product.id %}" class="btn btn-outline-secondary">+</a>
-                        <a href="{% url 'delete_from_cart' item.product.id %}" class="btn btn-outline-secondary">-</a>
+                        <a href="{% url 'add_in_cart' item.product.id %}" class="btn btn-outline-secondary">+</a>
+                        <a href="{% url 'delete_in_cart' item.product.id %}" class="btn btn-outline-secondary">-</a>
                       </div>
                 </div>
               </div>
