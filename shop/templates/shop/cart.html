@@ -18,7 +18,7 @@
   <body style="background-color: #22272e">
     <nav class="navbar" style="background-color: #1c2128">
       <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#"
+        <a class="navbar-brand text-white" href="/"
           >Магазин "Стол, стул, табурет"</a
         >
         <a href="/cart" class="btn btn-outline-light">Корзина</a>
@@ -56,12 +56,8 @@
               <div class="col-md-2">
                 <div class="card-body">
                     <div class="d-grid gap-1">
-                        <button type="button" class="btn btn-outline-secondary">
-                          +
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary">
-                          -
-                        </button>
+                        <a href="{% url 'add_to_cart' item.product.id %}" class="btn btn-outline-secondary">+</a>
+                        <a href="{% url 'delete_from_cart' item.product.id %}" class="btn btn-outline-secondary">-</a>
                       </div>
                 </div>
               </div>
